@@ -65,6 +65,19 @@ const State = {
       unlocksAt:       300,
       hired:           false,
     },
+    ferryman: {
+      id:              'ferryman',
+      name:            'The Ferryman',
+      icon:            '⛵',
+      desc:            'Knows every bend in the river. +0.5 miles/sec',
+      fishPerSec:      0,
+      dollarsPerSec:   0,
+      milesPerSec:     0.5,
+      suspicionPerSec: 0,
+      cost:            350,
+      unlocksAt:       450,
+      hired:           false,
+    },
     widow: {
       id:              'widow',
       name:            'Widow Douglas',
@@ -274,7 +287,7 @@ const State = {
       name:  'Lucky Cast',
       icon:  '🏃',
       desc:  'Each manual fish catch gives 3 fish instead of 1',
-      cost:  1,
+      cost:  3,
       owned: false,
     },
     fasterCurrent: {
@@ -282,7 +295,7 @@ const State = {
       name:  'Faster Current',
       icon:  '🌊',
       desc:  '+10% miles/sec base',
-      cost:  2,
+      cost:  6,
       owned: false,
     },
     goodReputation: {
@@ -290,7 +303,7 @@ const State = {
       name:  'Good Reputation',
       icon:  '🌟',
       desc:  'Towns give +25% bonuses',
-      cost:  2,
+      cost:  6,
       owned: false,
     },
     seasonedFisherman: {
@@ -298,7 +311,7 @@ const State = {
       name:  'Seasoned Fisherman',
       icon:  '🎣',
       desc:  'Start with Fishing Net owned',
-      cost:  3,
+      cost:  10,
       owned: false,
     },
     fullCrew: {
@@ -306,7 +319,7 @@ const State = {
       name:  'Full Crew',
       icon:  '👥',
       desc:  'All companions cost 50% less',
-      cost:  5,
+      cost:  15,
       owned: false,
     },
     riverWisdom: {
@@ -314,7 +327,7 @@ const State = {
       name:  'River Wisdom',
       icon:  '📖',
       desc:  '+3 bonus Rep on every prestige',
-      cost:  4,
+      cost:  10,
       owned: false,
     },
     layOfTheLand: {
@@ -322,7 +335,39 @@ const State = {
       name:  'Lay of the Land',
       icon:  '🗺️',
       desc:  'Suspicion is capped at 80% — raids happen less often',
-      cost:  3,
+      cost:  8,
+      owned: false,
+    },
+    hucksInstinct: {
+      id:    'hucksInstinct',
+      name:  "Huck's Instinct",
+      icon:  '🧠',
+      desc:  'Jim catches +2 extra fish/sec',
+      cost:  8,
+      owned: false,
+    },
+    riversBlessing: {
+      id:    'riversBlessing',
+      name:  "River's Blessing",
+      icon:  '🌿',
+      desc:  'Start each run with $200',
+      cost:  12,
+      owned: false,
+    },
+    oldFaithful: {
+      id:    'oldFaithful',
+      name:  'Old Faithful',
+      icon:  '⚙️',
+      desc:  'Start with Sturdy Raft and Town Dock already owned',
+      cost:  20,
+      owned: false,
+    },
+    tallTales: {
+      id:    'tallTales',
+      name:  'Tall Tales',
+      icon:  '📢',
+      desc:  'All companion dollar income +25%',
+      cost:  25,
       owned: false,
     },
   },
@@ -365,12 +410,22 @@ State.recalcRates = function () {
   let suspicionPerSec       = 0;
   let suspicionDecayPerSec  = 0;
 
+  let companionDollarsPerSec = 0;
   for (const c of Object.values(State.companions)) {
     if (!c.hired) continue;
-    fishPerSec      += c.fishPerSec;
-    dollarsPerSec   += c.dollarsPerSec;
-    suspicionPerSec += c.suspicionPerSec;
+    fishPerSec             += c.fishPerSec;
+    companionDollarsPerSec += c.dollarsPerSec;
+    milesPerSec            += (c.milesPerSec || 0);
+    suspicionPerSec        += c.suspicionPerSec;
   }
+
+  if (State.freedomUpgrades.hucksInstinct.owned && State.companions.jim.hired) {
+    fishPerSec += 2;
+  }
+  if (State.freedomUpgrades.tallTales.owned) {
+    companionDollarsPerSec *= 1.25;
+  }
+  dollarsPerSec += companionDollarsPerSec;
 
   for (const u of Object.values(State.upgrades)) {
     if (!u.owned) continue;

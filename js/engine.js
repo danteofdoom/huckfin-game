@@ -206,6 +206,15 @@ Engine._applyFreedomUpgrades = function () {
     State.upgrades.twoLines.owned   = true;
     State.upgrades.net.owned        = true;
   }
+
+  if (State.freedomUpgrades.oldFaithful.owned) {
+    State.upgrades.sturdyRaft.owned = true;
+    State.upgrades.townDock.owned   = true;
+  }
+
+  if (State.freedomUpgrades.riversBlessing.owned) {
+    State.dollars += 200;
+  }
 };
 
 // ── Offline Earnings ───────────────────────────────────────────────────────
