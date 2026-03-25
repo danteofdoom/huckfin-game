@@ -64,7 +64,14 @@ Engine._tickSuspicion = function () {
     const lost = State.dollars * 0.3;
     State.dollars   = Math.max(0, State.dollars - lost);
     State.suspicion = 0;
-    UI.log(`⚠️ The law caught up with the King's schemes! Lost $${lost.toFixed(2)}.`);
+    const msgs = [
+      `⚠️ The sheriff came knocking — the King's latest con unravelled fast. Lost ${UI.fmtDollars(lost)}.`,
+      `⚠️ An angry mob from the last town caught up with the raft. The Duke's handbills were lies. Lost ${UI.fmtDollars(lost)}.`,
+      `⚠️ Federal marshals boarded at dawn. Someone talked. Lost ${UI.fmtDollars(lost)}.`,
+      `⚠️ Three towns remembered the King's face. You paid to make them forget. Lost ${UI.fmtDollars(lost)}.`,
+    ];
+    UI.log(msgs[Math.floor(Math.random() * msgs.length)]);
+    UI.flashRed();
   }
 };
 
@@ -88,44 +95,40 @@ Engine._triggerTown = function (town) {
       const earned = State.fish * State.rates.fishSellPrice * 2 * bonus;
       State.dollars += earned;
       State.fish     = 0;
-      UI.log(`🏘️ ${town.name}: Sold all fish at double price! +$${earned.toFixed(2)}`);
+      UI.log(`🏘️ Cairo: The market fishmongers fight over your catch. Sold everything at double price! +${UI.fmtDollars(earned)}`);
       break;
     }
 
     case 'Memphis': {
-      // Unlock King and Duke companions (reduce unlocksAt so they appear in UI)
       State.companions.king.unlocksAt = 0;
       State.companions.duke.unlocksAt = 0;
-      UI.log(`🏘️ ${town.name}: Two shady characters offer to join your raft...`);
+      UI.log(`🏘️ Memphis: Two well-dressed strangers step off the levee. They have the look of men with schemes — and the charm to sell them.`);
       break;
     }
 
     case 'Vicksburg': {
       if (State.companions.king.hired) {
-        // Con gone wrong — lose 20% dollars
         const lost = State.dollars * 0.2;
         State.dollars -= lost;
-        UI.log(`🏘️ ${town.name}: The King's con went wrong! Lost $${lost.toFixed(2)}.`);
+        UI.log(`🏘️ Vicksburg: The King's latest scheme collapsed spectacularly. The sheriff is not amused. Lost ${UI.fmtDollars(lost)}.`);
+        UI.flashRed();
       } else {
         const earned = 500 * bonus;
         State.dollars += earned;
-        UI.log(`🏘️ ${town.name}: Honest trading pays off! +$${earned.toFixed(2)}`);
+        UI.log(`🏘️ Vicksburg: Clean hands, honest trade. The merchants here respect that. +${UI.fmtDollars(earned)}`);
       }
       break;
     }
 
     case 'Natchez': {
-      // Widow Douglas unlock
       State.companions.widow.unlocksAt = 0;
-      UI.log(`🏘️ ${town.name}: Widow Douglas steps onto the dock. She looks trustworthy.`);
+      UI.log(`🏘️ Natchez: A kind-faced woman waves from the dock — Widow Douglas. She's heard you're an honest sort and would like to join you downriver.`);
       break;
     }
 
     case 'Baton Rouge': {
-      // Permanent fish sell price boost for this run: multiply current multiplier by 1.5
-      // We apply this by bumping a persistent run bonus on state
       State._batonRougeBonus = (State._batonRougeBonus || 1) * 1.5;
-      UI.log(`🏘️ ${town.name}: Your reputation precedes you. Fish prices up 50%!`);
+      UI.log(`🏘️ Baton Rouge: Word of your trading has spread ahead of the raft. Merchants are competing for your catch. Fish prices up 50% for the rest of the journey!`);
       break;
     }
 
@@ -151,8 +154,9 @@ Engine._prestige = function () {
   State.rep += wisdomBonus;
 
   const totalRep = repEarned + wisdomBonus;
-  const repMsg   = totalRep > 0 ? `Earned ${totalRep.toFixed(0)} Rep.` : `No rep earned this run.`;
-  UI.log(`🎉 New Orleans! Journey complete. ${repMsg} Starting again...`);
+  const repMsg   = totalRep > 0 ? `You earned ${totalRep.toFixed(0)} ⭐ Rep.` : `No rep earned — spend more next run.`;
+  UI.log(`🎉 New Orleans! You made it to the end of the river. ${repMsg} The raft turns north again...`);
+  UI.flashPrestige();
 
   // Preserve freedom upgrades and rep, reset everything else
   const savedRep              = State.rep;

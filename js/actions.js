@@ -8,6 +8,7 @@ Actions.fish = function () {
   const caught = State.freedomUpgrades.headStart.owned ? 3 : 1;
   State.fish += caught;
   State.stats.totalFish += caught;
+  UI.spawnFishFloat(caught);
   UI.render();
 };
 
@@ -57,7 +58,15 @@ Actions.buyCompanion = function (id) {
   companion.hired    = true;
 
   State.recalcRates();
-  UI.log(`✅ ${companion.icon} ${companion.name} joined your raft!`);
+  const hireMsgs = {
+    jim:      `👨 Jim shoulders his pole. "I'll pull my weight, Huck."`,
+    tom:      `🎩 Tom tips his hat. "Leave the sellin' to me — I know how to talk to merchants."`,
+    king:     `👑 The King spreads his arms wide. "Your majesty has arrived! The dollars will flow... as will the risk."`,
+    duke:     `🎭 The Duke bows with a flourish. "The Duke of Bridgewater, at your service. I'll print the handbills."`,
+    ferryman: `⛵ The old ferryman nods slowly. "I know every sandbar and eddy between here and New Orleans."`,
+    widow:    `🕯️ Widow Douglas steps aboard. "I'll see to it you're known as an honest soul on this river."`,
+  };
+  UI.log(hireMsgs[companion.id] || `✅ ${companion.icon} ${companion.name} joined your raft!`);
   UI.render();
 };
 
