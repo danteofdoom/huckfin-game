@@ -73,6 +73,9 @@ Actions.buyUpgrade = function (id) {
     return;
   }
 
+  // Check mile requirement
+  if (upgrade.unlocksAt > 0 && State.miles < upgrade.unlocksAt) return;
+
   if (State.dollars < upgrade.cost) {
     UI.log(`💸 Not enough dollars for ${upgrade.name}. Need $${upgrade.cost}.`);
     return;

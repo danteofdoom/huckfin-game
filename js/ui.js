@@ -171,10 +171,11 @@ UI._renderUpgrades = function () {
     // Hide if prerequisite not yet owned
     if (u.requires && !State.upgrades[u.requires].owned) continue;
 
-    const canAfford = State.dollars >= u.cost;
+    const mileLocked = u.unlocksAt > 0 && State.miles < u.unlocksAt;
+    const canAfford  = !mileLocked && State.dollars >= u.cost;
 
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = mileLocked ? 'card card-locked' : 'card';
 
     card.innerHTML = `
       <div class="card-info">
@@ -184,10 +185,12 @@ UI._renderUpgrades = function () {
       <div class="card-action">
         ${u.owned
           ? `<span class="badge-owned">✓ Owned</span>`
-          : `<button
-              onclick="Actions.buyUpgrade('${u.id}')"
-              ${canAfford ? '' : 'disabled'}
-             >${UI.fmtDollars(u.cost)}</button>`
+          : mileLocked
+            ? `<span class="badge-locked">Mile ${u.unlocksAt}</span>`
+            : `<button
+                onclick="Actions.buyUpgrade('${u.id}')"
+                ${canAfford ? '' : 'disabled'}
+               >${UI.fmtDollars(u.cost)}</button>`
         }
       </div>
     `;

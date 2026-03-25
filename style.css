@@ -323,6 +323,16 @@ h2 {
   padding: 4px 8px;
 }
 
+.badge-locked {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 4px 8px;
+}
+
+.card-locked {
+  opacity: 0.45;
+}
+
 /* ── Log ──────────────────────────────────────────────────── */
 #log-section {
   background: var(--bg-panel);
