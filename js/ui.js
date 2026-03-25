@@ -121,6 +121,10 @@ UI._renderSuspicion = function () {
   const bar = document.getElementById('suspicion-bar');
   bar.style.width = `${State.suspicion}%`;
   bar.classList.toggle('suspicion-high', State.suspicion >= 75);
+
+  const bribeCost = Actions.bribeCost();
+  document.getElementById('bribe-cost').textContent = UI.fmtDollars(bribeCost);
+  document.getElementById('btn-bribe').disabled = State.dollars < bribeCost || State.suspicion <= 0;
 };
 
 // ── Companions ─────────────────────────────────────────────────────────────

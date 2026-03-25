@@ -246,12 +246,24 @@ const State = {
       name:       'Lay Low',
       icon:       '🤫',
       category:   'risk',
-      desc:       'Suspicion grows 50% slower',
+      desc:       'Suspicion decays 0.5/sec passively',
       cost:       600,
       unlocksAt:  0,
       owned:      false,
       requires:   null,
-      effect:     { suspicionMultiplier: 0.5 },
+      effect:     { suspicionDecayPerSec: 0.5 },
+    },
+    lookoutBoy: {
+      id:         'lookoutBoy',
+      name:       'Lookout Boy',
+      icon:       '👁️',
+      category:   'risk',
+      desc:       'Suspicion decays an extra 1/sec',
+      cost:       800,
+      unlocksAt:  0,
+      owned:      false,
+      requires:   'layLow',
+      effect:     { suspicionDecayPerSec: 1.0 },
     },
   },
 
@@ -334,23 +346,24 @@ const State = {
 
   // ── Derived rates (recomputed each tick) ───────────────────
   rates: {
-    fishPerSec:      0,
-    dollarsPerSec:   0,
-    milesPerSec:     0,
-    fishSellPrice:   1,
-    suspicionPerSec: 0,
-    repMult:         1,
+    fishPerSec:           0,
+    dollarsPerSec:        0,
+    milesPerSec:          0,
+    fishSellPrice:        1,
+    suspicionPerSec:      0,
+    suspicionDecayPerSec: 0,
+    repMult:              1,
   },
 };
 
 // Recompute all derived rates from current state
 State.recalcRates = function () {
-  let fishPerSec       = 0;
-  let dollarsPerSec    = 0;
-  let milesPerSec      = 0;
-  let fishSellMultiplier = 1;
-  let suspicionMult    = 1;
-  let suspicionPerSec  = 0;
+  let fishPerSec            = 0;
+  let dollarsPerSec         = 0;
+  let milesPerSec           = 0;
+  let fishSellMultiplier    = 1;
+  let suspicionPerSec       = 0;
+  let suspicionDecayPerSec  = 0;
 
   for (const c of Object.values(State.companions)) {
     if (!c.hired) continue;
@@ -361,22 +374,21 @@ State.recalcRates = function () {
 
   for (const u of Object.values(State.upgrades)) {
     if (!u.owned) continue;
-    if (u.effect.fishPerSec)          fishPerSec           += u.effect.fishPerSec;
-    if (u.effect.milesPerSec)         milesPerSec          += u.effect.milesPerSec;
-    if (u.effect.fishSellMultiplier)  fishSellMultiplier    = u.effect.fishSellMultiplier;
-    if (u.effect.suspicionMultiplier) suspicionMult         = u.effect.suspicionMultiplier;
+    if (u.effect.fishPerSec)           fishPerSec           += u.effect.fishPerSec;
+    if (u.effect.milesPerSec)          milesPerSec          += u.effect.milesPerSec;
+    if (u.effect.fishSellMultiplier)   fishSellMultiplier    = u.effect.fishSellMultiplier;
+    if (u.effect.suspicionDecayPerSec) suspicionDecayPerSec += u.effect.suspicionDecayPerSec;
   }
 
   if (State.freedomUpgrades.fasterCurrent.owned) {
     milesPerSec *= 1.1;
   }
 
-  suspicionPerSec *= suspicionMult;
-
-  State.rates.fishPerSec      = fishPerSec;
-  State.rates.dollarsPerSec   = dollarsPerSec;
-  State.rates.milesPerSec     = milesPerSec;
-  State.rates.fishSellPrice   = fishSellMultiplier * (State._batonRougeBonus || 1);
-  State.rates.suspicionPerSec = suspicionPerSec;
-  State.rates.repMult         = State.companions.widow.hired ? 1.5 : 1.0;
+  State.rates.fishPerSec           = fishPerSec;
+  State.rates.dollarsPerSec        = dollarsPerSec;
+  State.rates.milesPerSec          = milesPerSec;
+  State.rates.fishSellPrice        = fishSellMultiplier * (State._batonRougeBonus || 1);
+  State.rates.suspicionPerSec      = suspicionPerSec;
+  State.rates.suspicionDecayPerSec = suspicionDecayPerSec;
+  State.rates.repMult              = State.companions.widow.hired ? 1.5 : 1.0;
 };

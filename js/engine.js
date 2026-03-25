@@ -48,11 +48,12 @@ Engine.tick = function () {
 // ── Suspicion ──────────────────────────────────────────────────────────────
 
 Engine._tickSuspicion = function () {
-  if (State.rates.suspicionPerSec === 0) return;
+  if (State.rates.suspicionPerSec === 0 && State.suspicion === 0) return;
 
   const cap  = State.freedomUpgrades.layOfTheLand.owned ? 80 : 100;
   const prev = State.suspicion;
-  State.suspicion = Math.min(State.suspicion + State.rates.suspicionPerSec, cap);
+  const net  = State.rates.suspicionPerSec - State.rates.suspicionDecayPerSec;
+  State.suspicion = Math.max(0, Math.min(State.suspicion + net, cap));
 
   // Warn once when crossing 75%
   if (prev < 75 && State.suspicion >= 75) {

@@ -210,10 +210,16 @@ button:disabled {
   padding: 8px 12px;
 }
 
+#suspicion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
 #suspicion-label {
   font-size: 12px;
   color: var(--red);
-  margin-bottom: 4px;
 }
 
 #suspicion-bar-bg {

@@ -107,6 +107,25 @@ Actions.buyFreedomUpgrade = function (id) {
   UI.render();
 };
 
+// ── Bribe ──────────────────────────────────────────────────────────────────
+
+Actions.bribeCost = function () {
+  return Math.round(50 + State.suspicion * 2);
+};
+
+Actions.bribe = function () {
+  if (State.suspicion <= 0) return;
+  const cost = Actions.bribeCost();
+  if (State.dollars < cost) {
+    UI.log(`💸 Not enough dollars to bribe. Need ${UI.fmtDollars(cost)}.`);
+    return;
+  }
+  State.dollars  -= cost;
+  State.suspicion = Math.max(0, State.suspicion - 25);
+  UI.log(`🤝 Bribed the Sheriff. Suspicion down 25%.`);
+  UI.render();
+};
+
 // ── Helpers ────────────────────────────────────────────────────────────────
 
 // Apply Full Crew freedom upgrade discount
@@ -121,6 +140,8 @@ Actions.init = function () {
   document.getElementById('btn-fish').addEventListener('click', Actions.fish);
   document.getElementById('btn-sell-half').addEventListener('click', Actions.sellHalf);
   document.getElementById('btn-sell').addEventListener('click', Actions.sellFish);
+
+  document.getElementById('btn-bribe').addEventListener('click', Actions.bribe);
 
   document.getElementById('btn-debug').addEventListener('click', () => {
     document.getElementById('debug-section').classList.toggle('hidden');
