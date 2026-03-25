@@ -176,9 +176,9 @@ Engine._prestige = function () {
 };
 
 Engine._applyFreedomUpgrades = function () {
-  if (State.freedomUpgrades.headStart.owned) {
-    State.companions.jim.hired = true;
-  }
+  // Jim always starts hired — no click required
+  State.companions.jim.hired = true;
+
   if (State.freedomUpgrades.seasonedFisherman.owned) {
     State.upgrades.betterLine.owned = true;
     State.upgrades.twoLines.owned   = true;

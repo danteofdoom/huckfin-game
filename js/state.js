@@ -27,7 +27,7 @@ const State = {
       suspicionPerSec: 0,
       cost:            0,
       unlocksAt:       0,
-      hired:           false,
+      hired:           true,
     },
     tom: {
       id:              'tom',
@@ -295,7 +295,7 @@ State.recalcRates = function () {
   State.rates.fishPerSec      = fishPerSec;
   State.rates.dollarsPerSec   = dollarsPerSec;
   State.rates.milesPerSec     = milesPerSec;
-  State.rates.fishSellPrice   = fishSellMultiplier;
+  State.rates.fishSellPrice   = fishSellMultiplier * (State._batonRougeBonus || 1);
   State.rates.suspicionPerSec = suspicionPerSec;
   State.rates.repMult         = State.companions.widow.hired ? 1.5 : 1.0;
 };

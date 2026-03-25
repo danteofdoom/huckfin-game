@@ -14,8 +14,7 @@ Actions.fish = function () {
 Actions.sellFish = function () {
   if (State.fish <= 0) return;
 
-  const batonBonus  = State._batonRougeBonus || 1;
-  const earned      = Math.floor(State.fish) * State.rates.fishSellPrice * batonBonus;
+  const earned      = Math.floor(State.fish) * State.rates.fishSellPrice;
   State.dollars    += earned;
   State.fish        = 0;
 
