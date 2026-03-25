@@ -1,0 +1,411 @@
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #1a1208;
+  --bg-panel:    #241a0e;
+  --bg-card:     #2e2010;
+  --border:      #5a3e1b;
+  --text:        #e8d5a3;
+  --text-muted:  #8a7050;
+  --accent:      #c8860a;
+  --accent-dim:  #7a5206;
+  --green:       #5a9a3a;
+  --red:         #a03030;
+  --river:       #1a4a6a;
+  --river-fill:  #2a7aaa;
+  --font:        'Courier New', Courier, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  min-height: 100vh;
+  padding: 0;
+}
+
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+header h1 {
+  font-size: 18px;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+#day-counter {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ── River Progress ───────────────────────────────────────── */
+#river {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+#river-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+#next-town {
+  color: var(--accent);
+}
+
+#progress-bar-bg {
+  background: var(--river);
+  border-radius: 2px;
+  height: 10px;
+  width: 100%;
+}
+
+#progress-bar {
+  background: var(--river-fill);
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* ── Resources ────────────────────────────────────────────── */
+#resources {
+  display: flex;
+  gap: 8px;
+}
+
+.resource {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.resource-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.resource-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.resource-value {
+  font-size: 16px;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.resource-rate {
+  font-size: 11px;
+  color: var(--green);
+}
+
+.resource-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── Actions ──────────────────────────────────────────────── */
+#actions {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.5px;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background: #e09a12;
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--border);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Suspicion ────────────────────────────────────────────── */
+#suspicion-section {
+  background: var(--bg-panel);
+  border: 1px solid var(--red);
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+#suspicion-label {
+  font-size: 12px;
+  color: var(--red);
+  margin-bottom: 4px;
+}
+
+#suspicion-bar-bg {
+  background: #3a1010;
+  border-radius: 2px;
+  height: 8px;
+}
+
+#suspicion-bar {
+  background: var(--red);
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* ── Main Panel ───────────────────────────────────────────── */
+#main-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#companions-section,
+#upgrades-section {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+/* ── Companion / Upgrade Cards ────────────────────────────── */
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg-card);
+}
+
+.card:last-child {
+  border-bottom: none;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-name {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.card-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.card-action {
+  min-width: 90px;
+  text-align: right;
+}
+
+.card-action button {
+  padding: 6px 10px;
+  font-size: 12px;
+  flex: none;
+}
+
+.badge-hired {
+  font-size: 11px;
+  color: var(--green);
+  padding: 4px 8px;
+}
+
+.badge-locked {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 4px 8px;
+}
+
+.badge-owned {
+  font-size: 11px;
+  color: var(--green);
+  padding: 4px 8px;
+}
+
+/* ── Log ──────────────────────────────────────────────────── */
+#log-section {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+#log {
+  max-height: 100px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.log-entry {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 2px 0;
+  border-bottom: 1px solid var(--bg-card);
+}
+
+.log-entry:first-child {
+  color: var(--text);
+}
+
+/* ── Prestige Shop ────────────────────────────────────────── */
+#prestige-section {
+  background: var(--bg-panel);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+#prestige-section h2 {
+  color: var(--accent);
+  border-bottom-color: var(--accent-dim);
+}
+
+#rep-available {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+
+/* ── Footer ───────────────────────────────────────────────── */
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.btn-subtle {
+  background: none;
+  border: 1px solid var(--bg-card);
+  color: var(--text-muted);
+  font-size: 11px;
+  padding: 4px 10px;
+  flex: none;
+}
+
+.btn-subtle:hover {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-danger {
+  background: none;
+  border: 1px solid var(--red);
+  color: var(--red);
+  font-size: 11px;
+  padding: 4px 10px;
+  flex: none;
+}
+
+.btn-danger:hover {
+  background: var(--red);
+  color: var(--text);
+}
+
+/* ── Debug Panel ──────────────────────────────────────────── */
+#debug-section {
+  background: var(--bg-panel);
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+#debug-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#debug-controls button {
+  flex: none;
+  padding: 6px 10px;
+  font-size: 11px;
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* ── Utility ──────────────────────────────────────────────── */
+.hidden {
+  display: none !important;
+}
+

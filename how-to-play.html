@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Play — Huck Finn's Raft</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .section { margin-bottom: 16px; }
+    .section p  { color: var(--text); line-height: 1.8; margin: 8px 0; font-size: 13px; }
+    .section ul { padding-left: 18px; margin: 6px 0; }
+    .section li { color: var(--text); line-height: 1.9; font-size: 13px; }
+    .callout {
+      background: var(--bg-card);
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 4px 4px 0;
+      font-size: 13px;
+      color: var(--text);
+      margin: 10px 0;
+      line-height: 1.7;
+    }
+    .callout.warning { border-left-color: var(--red); }
+    .back-link {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div id="app">
+
+    <header>
+      <h1>🛖 Huck Finn's Raft</h1>
+      <span>How to Play</span>
+    </header>
+
+    <a class="back-link" href="index.html">← Back to game</a>
+
+    <!-- The basics -->
+    <section class="section">
+      <div id="companions-section">
+        <h2>The Basics</h2>
+        <p>You're Huck Finn. You've got a raft, a fishing line, and a thousand miles of river ahead of you. The goal is simple: drift down the Mississippi from the north all the way to New Orleans.</p>
+        <p>To get there you need money. To make money you catch fish and sell them. To catch more fish you hire companions and buy upgrades. The further you travel, the more becomes available to you.</p>
+      </div>
+    </section>
+
+    <!-- Fish and dollars -->
+    <section class="section">
+      <div id="companions-section">
+        <h2>Fish &amp; Dollars</h2>
+        <p>Tap the <strong>🎣 Fish</strong> button to catch fish by hand. Once you have fish, tap <strong>💵 Sell Fish</strong> to convert them into dollars.</p>
+        <p>Dollars are spent on companions and upgrades — everything that makes the game run itself. Early on you'll be tapping a lot. That changes quickly once Jim is aboard.</p>
+        <div class="callout">
+          💡 The <strong>Trade upgrades</strong> (Town Dock, Haggle, Known Trader) multiply how much each fish is worth when you sell. Prioritise these once you have steady fishing income.
+        </div>
+      </div>
+    </section>
+
+    <!-- Miles -->
+    <section class="section">
+      <div id="companions-section">
+        <h2>Miles &amp; the River</h2>
+        <p>The progress bar at the top shows how far down the river you are. Miles accumulate passively — but only once you've bought <strong>Raft upgrades</strong>. Without them the raft drifts at 0 miles per second and you'll never reach New Orleans.</p>
+        <p>Buy the Sturdy Raft as soon as you can afford it. From there, each raft upgrade multiplies how fast you travel.</p>
+      </div>
+    </section>
+
+    <!-- Companions -->
+    <section class="section">
+      <div id="companions-section">
+        <h2>Companions</h2>
+        <p>Companions join your raft and earn resources every second without you doing anything. They unlock as you travel further downriver.</p>
+        <ul>
+          <li><strong>👨 Jim</strong> — free from the start. Fishes for you passively.</li>
+          <li><strong>🎩 Tom Sawyer</strong> — appears at mile 100. Sells fish and earns dollars directly.</li>
+          <li><strong>👑 The King</strong> and <strong>🎭 The Duke</strong> — appear at mile 200 (Memphis). High earners, but they come with a catch.</li>
+          <li><strong>🕯️ Widow Douglas</strong> — appears at mile 600 (Natchez). Boosts your Rep earnings on prestige.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Suspicion -->
+    <section class="section">
+      <div id="companions-section">
+        <h2>Suspicion</h2>
+        <p>The King and the Duke are con men. The moment you hire either of them a <strong>Suspicion</strong> meter appears. It fills up over time as they run their schemes.</p>
+        <div class="callout warning">
+          ⚠️ When Suspicion reaches 100%, the law catches up with you. You lose 30% of your dollars and the meter resets. This will keep happening until you deal with it.
+        </div>
+        <p>To manage suspicion: buy the <strong>Lay Low</strong> upgrade, which halves the rate it fills. The King raises suspicion faster than the Duke — hiring both at once is risky early on.</p>
+        <p>If you don't want to deal with suspicion at all, simply don't hire the King or the Duke. You'll earn less dollars per second but the run will be smoother.</p>
+      </div>
+    </section>
+
+    <!-- Towns -->
+    <section class="section">
+      <div id="companions-section">
+        <h2>Towns</h2>
+        <p>As you pass through towns along the river, a one-time event triggers. Most are good — a bonus payout, unlocking a new companion, or a permanent price boost. One can go badly if the King is on your raft.</p>
+        <p>You can see the next town and its mile marker at the top of the river bar. Plan around them — arriving at Vicksburg without the King on board means an easy $500.</p>
+      </div>
+    </section>
+
+    <!-- Prestige -->
+    <section class="section">
+      <div id="companions-section">
+        <h2>Prestige</h2>
+        <p>When you reach New Orleans (mile 1000) the journey is complete. The run resets — your fish, dollars, miles, companions and upgrades all go back to zero.</p>
+        <p>In return you earn <strong>⭐ Rep</strong>, based on how many dollars you made during the run. The more dollars, the more Rep. Having the Widow Douglas on board increases the Rep you earn.</p>
+        <p>Rep is spent in the <strong>Freedom Upgrades</strong> panel, which appears after your first prestige. These upgrades are permanent — they apply at the start of every future run and make each journey faster and more profitable.</p>
+        <div class="callout">
+          💡 On your first prestige, aim for <strong>Head Start</strong> (Jim hired from the start) and <strong>Faster Current</strong> (+10% miles/sec). They make the second run noticeably quicker.
+        </div>
+      </div>
+    </section>
+
+    <!-- Saving -->
+    <section class="section">
+      <div id="companions-section">
+        <h2>Saving &amp; Offline Progress</h2>
+        <p>The game saves automatically every second. It's safe to close the tab at any time and pick up where you left off.</p>
+        <p>When you return, the game calculates how long you were away and credits you with the passive income (fish, dollars, miles) you would have earned — up to a maximum of 8 hours.</p>
+      </div>
+    </section>
+
+    <a class="back-link" href="index.html">← Back to game</a>
+
+  </div>
+</body>
+</html>
+
+  <style>
+    .help-section { margin-bottom: 20px; }
+    .help-section p { color: var(--text); line-height: 1.7; margin: 6px 0; font-size: 13px; }
+    .help-section ul { padding-left: 18px; }
+    .help-section li { color: var(--text); line-height: 1.8; font-size: 13px; }
+    .help-section li span { color: var(--text-muted); }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+    th { text-align: left; color: var(--text-muted); border-bottom: 1px solid var(--border); padding: 4px 6px; }
+    td { padding: 5px 6px; border-bottom: 1px solid var(--bg-card); color: var(--text); }
+    tr:last-child td { border-bottom: none; }
+    .back-link { display: inline-block; color: var(--accent); text-decoration: none; font-size: 13px; margin-bottom: 12px; }
+    .back-link:hover { text-decoration: underline; }
+    .tip { background: var(--bg-card); border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 4px 4px 0; font-size: 12px; color: var(--text-muted); margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <div id="app">
+
+    <header>
+      <h1>🛖 Huck Finn's Raft</h1>
+      <span>Help</span>
+    </header>
+
+    <a class="back-link" href="index.html">← Back to game</a>
+
+    <!-- How to play -->
+    <section class="help-section">
+      <div id="companions-section">
+        <h2>How to Play</h2>
+        <p>You're Huck Finn, drifting down the Mississippi River from the north all the way to New Orleans (mile 1000). Catch fish, sell them for dollars, hire companions, and buy upgrades to travel faster.</p>
+        <p>Complete the full journey to <strong>prestige</strong> — earn Rep and spend it on permanent Freedom Upgrades that carry over into every future run.</p>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="help-section">
+      <div id="companions-section">
+        <h2>Resources</h2>
+        <table>
+          <thead><tr><th>Resource</th><th>How to earn</th><th>Used for</th></tr></thead>
+          <tbody>
+            <tr><td>🐟 Fish</td><td>Tap Fish button or hire Jim</td><td>Selling for dollars</td></tr>
+            <tr><td>💰 Dollars</td><td>Sell fish, hire companions</td><td>Buying upgrades & companions</td></tr>
+            <tr><td>📍 Miles</td><td>Buy raft upgrades</td><td>Unlocking towns & companions</td></tr>
+            <tr><td>⭐ Rep</td><td>Earned on prestige</td><td>Freedom Upgrades (permanent)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Companions -->
+    <section class="help-section">
+      <div id="companions-section">
+        <h2>Companions</h2>
+        <p>Companions earn resources passively every second. They appear as you travel downriver.</p>
+        <table>
+          <thead><tr><th>Companion</th><th>Unlocks</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>👨 Jim</td><td>Start (free)</td><td>+1 fish/sec</td></tr>
+            <tr><td>🎩 Tom Sawyer</td><td>Mile 100 — $50</td><td>+$0.50/sec</td></tr>
+            <tr><td>👑 The King</td><td>Mile 300 — $200</td><td>+$1.50/sec, raises suspicion</td></tr>
+            <tr><td>🎭 The Duke</td><td>Mile 300 — $200</td><td>+$1.00/sec, raises suspicion</td></tr>
+            <tr><td>🕯️ Widow Douglas</td><td>Mile 500 — $500</td><td>Rep gains +50%</td></tr>
+          </tbody>
+        </table>
+        <div class="tip">⚠️ The King and Duke raise your Suspicion meter. At 100% you lose 30% of your dollars and it resets. Buy <strong>Lay Low</strong> to slow suspicion growth.</div>
+      </div>
+    </section>
+
+    <!-- Upgrades -->
+    <section class="help-section">
+      <div id="companions-section">
+        <h2>Upgrades</h2>
+        <p>Upgrades are permanent for the current run and unlock in chains — you must own the previous one first.</p>
+        <table>
+          <thead><tr><th>Category</th><th>Upgrades</th></tr></thead>
+          <tbody>
+            <tr><td>🎣 Fishing</td><td>Better Line → Two Lines → Fishing Net (more fish/sec)</td></tr>
+            <tr><td>🪵 Raft</td><td>Sturdy → Painted → Steam-Powered (more miles/sec)</td></tr>
+            <tr><td>💵 Trade</td><td>Town Dock → Haggle → Known Trader (fish worth more)</td></tr>
+            <tr><td>🤫 Risk</td><td>Lay Low (suspicion grows 50% slower)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Towns -->
+    <section class="help-section">
+      <div id="companions-section">
+        <h2>Towns</h2>
+        <p>Reaching a town triggers a one-time event. Some give bonuses, some carry risks.</p>
+        <table>
+          <thead><tr><th>Mile</th><th>Town</th><th>Event</th></tr></thead>
+          <tbody>
+            <tr><td>50</td><td>Cairo</td><td>All fish sold at double price</td></tr>
+            <tr><td>200</td><td>Memphis</td><td>The King &amp; Duke appear</td></tr>
+            <tr><td>400</td><td>Vicksburg</td><td>+$500 bonus — or lose 20% if King is aboard</td></tr>
+            <tr><td>600</td><td>Natchez</td><td>Widow Douglas appears</td></tr>
+            <tr><td>800</td><td>Baton Rouge</td><td>Fish prices +50% for the rest of the run</td></tr>
+            <tr><td>1000</td><td>New Orleans</td><td>Journey complete — prestige!</td></tr>
+          </tbody>
+        </table>
+        <div class="tip">💡 If you have the <strong>Good Reputation</strong> Freedom Upgrade, town bonuses are 25% larger.</div>
+      </div>
+    </section>
+
+    <!-- Prestige -->
+    <section class="help-section">
+      <div id="companions-section">
+        <h2>Prestige</h2>
+        <p>When you reach New Orleans (mile 1000) you complete the journey. Your run resets but you earn <strong>⭐ Rep</strong> based on dollars earned:</p>
+        <p style="text-align:center; color: var(--accent);">Rep = floor(dollars ÷ 200) × Rep multiplier</p>
+        <p>Spend Rep on <strong>Freedom Upgrades</strong> — permanent bonuses that apply to every future run.</p>
+        <table>
+          <thead><tr><th>Upgrade</th><th>Cost</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>🏃 Head Start</td><td>1 ⭐</td><td>Start with Jim already hired</td></tr>
+            <tr><td>🌊 Faster Current</td><td>2 ⭐</td><td>+10% miles/sec base</td></tr>
+            <tr><td>🌟 Good Reputation</td><td>2 ⭐</td><td>Town bonuses +25%</td></tr>
+            <tr><td>🎣 Seasoned Fisherman</td><td>3 ⭐</td><td>Start with Fishing Net already owned</td></tr>
+            <tr><td>👥 Full Crew</td><td>5 ⭐</td><td>All companions cost 50% less</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tips -->
+    <section class="help-section">
+      <div id="companions-section">
+        <h2>Tips</h2>
+        <ul>
+          <li>Hire Jim first — free fishing income from the very start.</li>
+          <li>Buy <strong>Sturdy Raft</strong> early so miles accumulate while you sleep.</li>
+          <li>Avoid hiring the King before Vicksburg (mile 400) unless you have Lay Low.</li>
+          <li>The game saves automatically every tick — safe to close the tab.</li>
+          <li>Offline earnings are capped at 8 hours.</li>
+          <li>First prestige goal: earn enough Rep for <strong>Head Start</strong> and <strong>Faster Current</strong>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <a class="back-link" href="index.html">← Back to game</a>
+
+  </div>
+</body>
+</html>

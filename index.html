@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Huck Finn's Raft</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header -->
+    <header>
+      <h1>🛖 Huck Finn's Raft</h1>
+      <span id="day-counter">Day 1</span>
+    </header>
+
+    <!-- River Progress -->
+    <section id="river">
+      <div id="river-label">
+        <span>📍 Mile <span id="miles">0</span></span>
+        <span id="miles-rate">+0.0 mi/sec</span>
+        <span id="next-town">Next: Cairo (Mile 50)</span>
+      </div>
+      <div id="progress-bar-bg">
+        <div id="progress-bar"></div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section id="resources">
+      <div class="resource">
+        <div class="resource-icon">🐟</div>
+        <div class="resource-info">
+          <span class="resource-value" id="fish">0</span>
+          <span class="resource-rate" id="fish-rate">+0.0/sec</span>
+        </div>
+        <div class="resource-label">Fish</div>
+      </div>
+      <div class="resource">
+        <div class="resource-icon">💰</div>
+        <div class="resource-info">
+          <span class="resource-value" id="dollars">$0.00</span>
+          <span class="resource-rate" id="dollars-rate">+$0.00/sec</span>
+        </div>
+        <div class="resource-label">Dollars</div>
+      </div>
+      <div class="resource">
+        <div class="resource-icon">⭐</div>
+        <div class="resource-info">
+          <span class="resource-value" id="rep">0</span>
+          <span class="resource-rate" id="rep-label">Rep</span>
+        </div>
+        <div class="resource-label">Reputation</div>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <section id="actions">
+      <button id="btn-fish" class="btn-primary">🎣 Fish</button>
+      <button id="btn-sell" class="btn-secondary">💵 Sell Fish</button>
+    </section>
+
+    <!-- Suspicion (hidden until King/Duke hired) -->
+    <section id="suspicion-section" class="hidden">
+      <div id="suspicion-label">⚠️ Suspicion: <span id="suspicion-value">0%</span></div>
+      <div id="suspicion-bar-bg">
+        <div id="suspicion-bar"></div>
+      </div>
+    </section>
+
+    <!-- Main Panel -->
+    <div id="main-panel">
+
+      <!-- Companions -->
+      <section id="companions-section">
+        <h2>Companions</h2>
+        <div id="companions-list">
+          <!-- populated by ui.js -->
+        </div>
+      </section>
+
+      <!-- Upgrades -->
+      <section id="upgrades-section">
+        <h2>Upgrades</h2>
+        <div id="upgrades-list">
+          <!-- populated by ui.js -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Prestige Shop (hidden until first prestige) -->
+    <section id="prestige-section" class="hidden">
+      <h2>⭐ Freedom Upgrades <span id="rep-available"></span></h2>
+      <div id="prestige-list">
+        <!-- populated by ui.js -->
+      </div>
+    </section>
+
+    <!-- Log -->
+    <section id="log-section">
+      <div id="log">
+        <p class="log-entry">🌊 The Mississippi stretches out before you...</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <button id="btn-debug" class="btn-subtle">debug</button>
+      <a href="how-to-play.html" class="btn-subtle" style="text-decoration:none; padding: 4px 10px;">how to play</a>
+      <button id="btn-reset" class="btn-danger">reset save</button>
+    </footer>
+
+    <!-- Debug Panel (hidden by default) -->
+    <section id="debug-section" class="hidden">
+      <h2>🛠 Debug</h2>
+      <div id="debug-controls">
+        <button onclick="Debug.addFish()">+100 Fish</button>
+        <button onclick="Debug.addDollars()">+$500</button>
+        <button onclick="Debug.addMiles()">+100 Miles</button>
+        <button onclick="Debug.addRep()">+5 Rep</button>
+        <button onclick="Debug.skipToCairo()">Skip to Cairo</button>
+        <button onclick="Debug.skipToMemphis()">Skip to Memphis</button>
+        <button onclick="Debug.skipToVicksburg()">Skip to Vicksburg</button>
+        <button onclick="Debug.triggerRaid()">Trigger Raid</button>
+        <button onclick="Debug.skipToPrestige()">Skip to Prestige</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/state.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/upgrades.js"></script>
+  <script src="js/actions.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/debug.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
