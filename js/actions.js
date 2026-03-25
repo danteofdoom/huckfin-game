@@ -85,6 +85,11 @@ Actions.buyUpgrade = function (id) {
   // Check mile requirement
   if (upgrade.unlocksAt > 0 && State.miles < upgrade.unlocksAt) return;
 
+  // Check companion requirement
+  if (upgrade.requiresCompanion) {
+    if (!upgrade.requiresCompanion.some(id => State.companions[id]?.hired)) return;
+  }
+
   if (State.dollars < upgrade.cost) {
     UI.log(`💸 Not enough dollars for ${upgrade.name}. Need $${upgrade.cost}.`);
     return;

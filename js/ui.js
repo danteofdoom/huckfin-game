@@ -204,6 +204,11 @@ UI._renderUpgrades = function () {
     // Hide if prerequisite not yet owned
     if (u.requires && !State.upgrades[u.requires].owned) continue;
 
+    // Hide companion-gated upgrades until the relevant companion is hired
+    if (u.requiresCompanion && !u.owned) {
+      if (!u.requiresCompanion.some(id => State.companions[id]?.hired)) continue;
+    }
+
     const mileLocked = u.unlocksAt > 0 && State.miles < u.unlocksAt;
     const canAfford  = !mileLocked && State.dollars >= u.cost;
 
