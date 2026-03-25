@@ -28,6 +28,9 @@ Engine.tick = function () {
   State.miles        = Math.min(State.miles + State.rates.milesPerSec, 1000);
   State.tickSeconds += 1;
 
+  State.stats.totalFish    += State.rates.fishPerSec;
+  State.stats.totalDollars += State.rates.dollarsPerSec;
+
   // Day counter: 1 day = 60 seconds
   State.day = 1 + Math.floor(State.tickSeconds / 60);
 
@@ -47,15 +50,16 @@ Engine.tick = function () {
 Engine._tickSuspicion = function () {
   if (State.rates.suspicionPerSec === 0) return;
 
+  const cap  = State.freedomUpgrades.layOfTheLand.owned ? 80 : 100;
   const prev = State.suspicion;
-  State.suspicion = Math.min(State.suspicion + State.rates.suspicionPerSec, 100);
+  State.suspicion = Math.min(State.suspicion + State.rates.suspicionPerSec, cap);
 
   // Warn once when crossing 75%
   if (prev < 75 && State.suspicion >= 75) {
     UI.log(`🚨 Suspicion is high — the law is watching. Lay low or face the consequences!`);
   }
 
-  if (State.suspicion >= 100) {
+  if (State.suspicion >= cap) {
     const lost = State.dollars * 0.3;
     State.dollars   = Math.max(0, State.dollars - lost);
     State.suspicion = 0;
@@ -140,7 +144,13 @@ Engine._prestige = function () {
   const repEarned = Math.floor(State.dollars / 200) * State.rates.repMult;
   State.rep += repEarned;
 
-  const repMsg = repEarned > 0 ? `Earned ${repEarned.toFixed(0)} Rep.` : `No rep earned this run.`;
+  State.stats.prestiges += 1;
+
+  const wisdomBonus = State.freedomUpgrades.riverWisdom.owned ? 3 : 0;
+  State.rep += wisdomBonus;
+
+  const totalRep = repEarned + wisdomBonus;
+  const repMsg   = totalRep > 0 ? `Earned ${totalRep.toFixed(0)} Rep.` : `No rep earned this run.`;
   UI.log(`🎉 New Orleans! Journey complete. ${repMsg} Starting again...`);
 
   // Preserve freedom upgrades and rep, reset everything else

@@ -5,7 +5,9 @@ const Actions = {};
 // ── Fishing ────────────────────────────────────────────────────────────────
 
 Actions.fish = function () {
-  State.fish += 1;
+  const caught = State.freedomUpgrades.headStart.owned ? 3 : 1;
+  State.fish += caught;
+  State.stats.totalFish += caught;
   UI.render();
 };
 
@@ -16,6 +18,7 @@ Actions.sellFish = function (silent) {
 
   const earned   = Math.floor(State.fish) * State.rates.fishSellPrice;
   State.dollars += earned;
+  State.stats.totalDollars += earned;
   State.fish     = 0;
 
   if (!silent) UI.log(`💵 Sold fish for $${earned.toFixed(2)}.`);
@@ -30,6 +33,7 @@ Actions.sellHalf = function () {
 
   const earned   = amount * State.rates.fishSellPrice;
   State.dollars += earned;
+  State.stats.totalDollars += earned;
   State.fish    -= amount;
 
   UI.log(`💵 Sold half your fish for $${earned.toFixed(2)}.`);
@@ -117,6 +121,11 @@ Actions.init = function () {
 
   document.getElementById('btn-debug').addEventListener('click', () => {
     document.getElementById('debug-section').classList.toggle('hidden');
+  });
+
+  document.getElementById('btn-stats').addEventListener('click', () => {
+    document.getElementById('stats-section').classList.toggle('hidden');
+    UI._renderStats();
   });
 
   document.getElementById('btn-reset').addEventListener('click', () => {

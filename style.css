@@ -429,6 +429,31 @@ footer {
   border: 1px solid var(--border);
 }
 
+/* ── Stats Panel ──────────────────────────────────────────── */
+#stats-section {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--bg-card);
+  color: var(--text-muted);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-row span:last-child {
+  color: var(--accent);
+}
+
 /* ── Utility ──────────────────────────────────────────────── */
 .hidden {
   display: none !important;

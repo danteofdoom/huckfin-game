@@ -42,6 +42,7 @@ UI.render = function () {
   UI._renderCompanions();
   UI._renderUpgrades();
   UI._renderPrestige();
+  UI._renderStats();
 };
 
 // ── Header ─────────────────────────────────────────────────────────────────
@@ -236,6 +237,24 @@ UI._renderPrestige = function () {
 
     list.appendChild(card);
   }
+};
+
+// ── Stats ───────────────────────────────────────────────────────────────────
+
+UI._renderStats = function () {
+  const section = document.getElementById('stats-section');
+  if (section.classList.contains('hidden')) return;
+
+  const rows = [
+    ['Fish caught',    UI.fmt(State.stats.totalFish)],
+    ['Dollars earned', UI.fmtDollars(State.stats.totalDollars)],
+    ['Journeys made',  State.stats.prestiges],
+    ['Day',            State.day],
+  ];
+
+  document.getElementById('stats-list').innerHTML = rows
+    .map(([label, value]) => `<div class="stat-row"><span>${label}</span><span>${value}</span></div>`)
+    .join('');
 };
 
 // ── Init ───────────────────────────────────────────────────────────────────

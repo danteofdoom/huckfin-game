@@ -45,6 +45,9 @@ Save.save = function () {
 
     // Towns — save only visited flag
     towns: State.towns.map(t => ({ mile: t.mile, visited: t.visited })),
+
+    // Lifetime stats
+    stats: { ...State.stats },
   };
 
   try {
@@ -123,6 +126,13 @@ Save.load = function () {
       const town = State.towns.find(t => t.mile === saved.mile);
       if (town) town.visited = saved.visited ?? false;
     }
+  }
+
+  // Lifetime stats
+  if (data.stats) {
+    State.stats.totalFish    = data.stats.totalFish    ?? 0;
+    State.stats.totalDollars = data.stats.totalDollars ?? 0;
+    State.stats.prestiges    = data.stats.prestiges    ?? 0;
   }
 
   // Calculate and apply offline earnings

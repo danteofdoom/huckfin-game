@@ -212,9 +212,9 @@ const State = {
   freedomUpgrades: {
     headStart: {
       id:    'headStart',
-      name:  'Head Start',
+      name:  'Lucky Cast',
       icon:  '🏃',
-      desc:  'Start with Jim already hired',
+      desc:  'Each manual fish catch gives 3 fish instead of 1',
       cost:  1,
       owned: false,
     },
@@ -250,6 +250,22 @@ const State = {
       cost:  5,
       owned: false,
     },
+    riverWisdom: {
+      id:    'riverWisdom',
+      name:  'River Wisdom',
+      icon:  '📖',
+      desc:  '+3 bonus Rep on every prestige',
+      cost:  4,
+      owned: false,
+    },
+    layOfTheLand: {
+      id:    'layOfTheLand',
+      name:  'Lay of the Land',
+      icon:  '🗺️',
+      desc:  'Suspicion is capped at 80% — raids happen less often',
+      cost:  3,
+      owned: false,
+    },
   },
 
   // ── Towns ──────────────────────────────────────────────────
@@ -261,6 +277,13 @@ const State = {
     { mile: 800,  name: 'Baton Rouge', visited: false, desc: 'Fish prices permanently +50% this run.' },
     { mile: 1000, name: 'New Orleans', visited: false, desc: 'Journey complete. Time to start again.' },
   ],
+
+  // ── Lifetime Stats (never reset) ───────────────────────────
+  stats: {
+    totalFish:    0,
+    totalDollars: 0,
+    prestiges:    0,
+  },
 
   // ── Derived rates (recomputed each tick) ───────────────────
   rates: {
