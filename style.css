@@ -215,6 +215,16 @@ button:disabled {
   transition: width 0.5s ease;
 }
 
+#suspicion-bar.suspicion-high {
+  background: #d45000;
+  animation: suspicion-pulse 1s ease-in-out infinite;
+}
+
+@keyframes suspicion-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
 /* ── Main Panel ───────────────────────────────────────────── */
 #main-panel {
   display: flex;

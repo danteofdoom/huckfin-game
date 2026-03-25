@@ -75,6 +75,9 @@ UI._renderResources = function () {
   document.getElementById('dollars').textContent      = UI.fmtDollars(State.dollars);
   document.getElementById('dollars-rate').textContent = `+${UI.fmtDollars(State.rates.dollarsPerSec)}/sec`;
   document.getElementById('rep').textContent          = UI.fmt(State.rep);
+
+  document.getElementById('btn-sell-half').disabled = State.fish < 2;
+  document.getElementById('btn-sell').disabled      = State.fish < 1;
 };
 
 // ── Suspicion ──────────────────────────────────────────────────────────────
@@ -89,8 +92,11 @@ UI._renderSuspicion = function () {
   }
 
   section.classList.remove('hidden');
-  document.getElementById('suspicion-value').textContent    = `${Math.floor(State.suspicion)}%`;
-  document.getElementById('suspicion-bar').style.width      = `${State.suspicion}%`;
+  document.getElementById('suspicion-value').textContent = `${Math.floor(State.suspicion)}%`;
+
+  const bar = document.getElementById('suspicion-bar');
+  bar.style.width = `${State.suspicion}%`;
+  bar.classList.toggle('suspicion-high', State.suspicion >= 75);
 };
 
 // ── Companions ─────────────────────────────────────────────────────────────

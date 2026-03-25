@@ -183,6 +183,17 @@ const State = {
       requires: 'haggle',
       effect:   { fishSellMultiplier: 5 },
     },
+    autoSell: {
+      id:       'autoSell',
+      name:     'River Merchant',
+      icon:     '🤑',
+      category: 'trade',
+      desc:     'Automatically sell fish each second',
+      cost:     250,
+      owned:    false,
+      requires: 'knownTrader',
+      effect:   {},
+    },
     // Risk reduction
     layLow: {
       id:       'layLow',

@@ -11,14 +11,28 @@ Actions.fish = function () {
 
 // ── Sell Fish ──────────────────────────────────────────────────────────────
 
-Actions.sellFish = function () {
+Actions.sellFish = function (silent) {
   if (State.fish <= 0) return;
 
-  const earned      = Math.floor(State.fish) * State.rates.fishSellPrice;
-  State.dollars    += earned;
-  State.fish        = 0;
+  const earned   = Math.floor(State.fish) * State.rates.fishSellPrice;
+  State.dollars += earned;
+  State.fish     = 0;
 
-  UI.log(`💵 Sold fish for $${earned.toFixed(2)}.`);
+  if (!silent) UI.log(`💵 Sold fish for $${earned.toFixed(2)}.`);
+  UI.render();
+};
+
+// ── Sell Half Fish ─────────────────────────────────────────────────────────
+
+Actions.sellHalf = function () {
+  const amount = Math.floor(State.fish / 2);
+  if (amount <= 0) return;
+
+  const earned   = amount * State.rates.fishSellPrice;
+  State.dollars += earned;
+  State.fish    -= amount;
+
+  UI.log(`💵 Sold half your fish for $${earned.toFixed(2)}.`);
   UI.render();
 };
 
@@ -98,6 +112,7 @@ Actions._companionCost = function (companion) {
 
 Actions.init = function () {
   document.getElementById('btn-fish').addEventListener('click', Actions.fish);
+  document.getElementById('btn-sell-half').addEventListener('click', Actions.sellHalf);
   document.getElementById('btn-sell').addEventListener('click', Actions.sellFish);
 
   document.getElementById('btn-debug').addEventListener('click', () => {
