@@ -126,4 +126,15 @@ Actions.init = function () {
       location.reload();
     }
   });
+
+  document.addEventListener('keydown', (e) => {
+    // Ignore shortcuts when typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === ' ' || e.code === 'Space') {
+      e.preventDefault();
+      Actions.fish();
+    } else if (e.key === 's' || e.key === 'S') {
+      Actions.sellFish();
+    }
+  });
 };

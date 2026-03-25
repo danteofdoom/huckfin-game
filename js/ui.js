@@ -53,18 +53,41 @@ UI._renderHeader = function () {
 // ── River ──────────────────────────────────────────────────────────────────
 
 UI._renderRiver = function () {
-  const miles   = State.miles;
-  const pct     = (miles / 1000) * 100;
+  const miles = State.miles;
+  const pct   = (miles / 1000) * 100;
 
-  document.getElementById('miles').textContent      = Math.floor(miles);
-  document.getElementById('miles-rate').textContent = `+${State.rates.milesPerSec.toFixed(2)} mi/sec`;
+  document.getElementById('miles').textContent        = Math.floor(miles);
+  document.getElementById('miles-rate').textContent   = `+${State.rates.milesPerSec.toFixed(2)} mi/sec`;
   document.getElementById('progress-bar').style.width = `${pct.toFixed(2)}%`;
+
+  // Town markers
+  const barBg   = document.getElementById('progress-bar-bg');
+  const existing = barBg.querySelectorAll('.town-marker');
+  if (existing.length === 0) {
+    // Render once — markers don't move
+    for (const town of State.towns) {
+      const marker = document.createElement('div');
+      marker.className   = 'town-marker';
+      marker.style.left  = `${(town.mile / 1000) * 100}%`;
+      marker.title       = town.name;
+      barBg.appendChild(marker);
+    }
+  }
+  // Update visited state each render
+  const markers = barBg.querySelectorAll('.town-marker');
+  State.towns.forEach((town, i) => {
+    markers[i]?.classList.toggle('visited', town.visited);
+  });
 
   // Next unvisited town
   const next = State.towns.find(t => !t.visited);
-  document.getElementById('next-town').textContent = next
-    ? `Next: ${next.name} (Mile ${next.mile})`
-    : '🎉 New Orleans ahead!';
+  if (next) {
+    const remaining = Math.ceil(next.mile - miles);
+    document.getElementById('next-town').textContent =
+      `Next: ${next.name} — ${remaining} mi`;
+  } else {
+    document.getElementById('next-town').textContent = '🎉 New Orleans ahead!';
+  }
 };
 
 // ── Resources ──────────────────────────────────────────────────────────────

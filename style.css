@@ -84,6 +84,21 @@ header h1 {
   border-radius: 2px;
   height: 10px;
   width: 100%;
+  position: relative;
+}
+
+.town-marker {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--text-muted);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.town-marker.visited {
+  background: var(--green);
 }
 
 #progress-bar {
